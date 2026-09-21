@@ -48,3 +48,30 @@ const year = document.getElementById("year");
 if (year) {
     year.textContent = new Date().getFullYear();
 }
+
+
+// Reveal images as they enter the viewport.
+const animatedImages = document.querySelectorAll(
+    ".about-photo, .equipment-images img, .gallery-item"
+);
+
+if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.18,
+            rootMargin: "0px 0px -8% 0px"
+        }
+    );
+
+    animatedImages.forEach(element => imageObserver.observe(element));
+} else {
+    animatedImages.forEach(element => element.classList.add("is-visible"));
+}

@@ -1108,3 +1108,97 @@ button {
     padding-top: 24px;
   }
 }
+
+
+/* SCROLL SNAP + IMAGE REVEAL ANIMATIONS */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.hero,
+.section,
+.cta {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Keep the fixed/sticky header from covering snapped sections. */
+.section,
+.cta {
+  scroll-margin-top: 0;
+}
+
+/* Images animate when they enter the viewport. */
+.about-photo,
+.equipment-images img,
+.gallery-item {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.about-photo {
+  transform: translateX(-70px);
+}
+
+.equipment-images img:first-child {
+  transform: translateX(70px);
+}
+
+.equipment-images img:last-child {
+  transform: translateX(-70px);
+}
+
+.gallery-item {
+  transform: translateY(55px);
+}
+
+.about-photo.is-visible,
+.equipment-images img.is-visible,
+.gallery-item.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 650ms ease;
+}
+
+.equipment-images img:nth-child(2).is-visible {
+  transition-delay: 120ms;
+}
+
+.gallery-item:nth-child(2).is-visible { transition-delay: 80ms; }
+.gallery-item:nth-child(3).is-visible { transition-delay: 160ms; }
+.gallery-item:nth-child(4).is-visible { transition-delay: 240ms; }
+.gallery-item:nth-child(5).is-visible { transition-delay: 320ms; }
+
+@media (max-width: 900px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .hero,
+  .section,
+  .cta {
+    scroll-snap-stop: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+
+  .about-photo,
+  .equipment-images img,
+  .gallery-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
