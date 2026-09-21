@@ -1152,3 +1152,48 @@ button {
         padding-bottom: 90px;
     }
 }
+
+/* MOBILE POLISH */
+@media (max-width: 900px) {
+    .mobile-nav {
+        position: relative;
+        z-index: 21;
+        border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* Keep anchor targets visible below the mobile header. */
+    #usluge,
+    #o-nama,
+    #galerija,
+    #kontakt {
+        scroll-margin-top: 84px;
+    }
+}
+
+@media (max-width: 600px) {
+    .mobile-nav.open {
+        padding-top: 14px;
+        padding-bottom: 20px;
+    }
+
+    .mobile-nav a {
+        padding: 2px 0;
+    }
+
+    /* Reduce the large empty area after the content on small screens. */
+    .about.section,
+    .equipment.section,
+    .gallery.section,
+    .service-area.section {
+        padding-bottom: 55px;
+    }
+
+    .cta-inner {
+        padding-top: 58px;
+        padding-bottom: 42px;
+    }
+
+    .cta-contact {
+        padding-top: 24px;
+    }
+}
